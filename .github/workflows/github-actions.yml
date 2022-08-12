@@ -1,0 +1,39 @@
+name: GitHub Actions
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Setup PHP
+        # Action gives to setup the PHP environment to test application
+        # https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          # Specify the PHP version
+          php-version: '8.1.3'
+      - name: Setup
+        # Install project
+        run: make setup
+      - name: Run linter
+        # Run Linter
+        run: make lint
+      - name: Run tests
+        # Run Linter
+        run: make test
+      - name: Run test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: e67067ab61442265806d4ff72a01052c20355b4918e327f395794a80cbf480f3
+        with:
+          coverageCommand: make test-coverage
+          coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
+          debug: true
