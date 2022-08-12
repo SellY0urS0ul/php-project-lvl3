@@ -19,6 +19,9 @@ jobs:
         with:
           # Specify the PHP version
           php-version: '8.1.3'
+      - name: Install SQLite3
+        # Install project
+        run: apt-get install php-sqlite3
       - name: Setup
         # Install project
         run: make setup
