@@ -43,6 +43,39 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination-container container">
+                        <div class="col pagination-text">
+                            <p>Showing {{$urls->firstItem()}} to {{$urls->lastItem()}} of {{$urls->total()}} results</p>
+                        </div>
+                        <div class="col btns">
+                            <ul class='pagination'>
+                    <?php
+                    $urlNextPageNumber = $urls->currentPage() + 1;
+                    $urlPreviousPageNumber = $urls->currentPage() - 1;
+                    if ($urls->onFirstPage()) {?>
+                        <li class='page-item previous disabled'><a href=''> < </a></li>
+                        <li class='page-item current-number disabled'><a href=''> {{$urls->currentPage()}} </a></li>
+                        <li class='page-item next-number'><a href='{{$urls->nextPageUrl()}}'> {{$urlNextPageNumber}} </a></li>
+                        <li class='page-item next'><a href='{{$urls->nextPageUrl()}}'> > </a></li>
+                    <?php
+                    }
+                    elseif ($urls->hasMorePages()) {?>
+                        <li class='page-item previous'><a href='{{$urls->previousPageUrl()}}'> < </a></li>
+                        <li class='page-item previous-number'><a href='{{$urls->previousPageUrl()}}'> {{$urlPreviousPageNumber}} </a></li>
+                        <li class='page-item next-number'><a href='{{$urls->nextPageUrl()}}'> {{$urlNextPageNumber}} </a></li>
+                        <li class='page-item next'><a href='{{$urls->nextPageUrl()}}'> > </a></li>
+                        <?php
+                    } else {?>
+                        <li class='page-item previous'><a href='{{$urls->previousPageUrl()}}'> < </a></li>
+                        <li class='page-item previous-number'><a href='{{$urls->previousPageUrl()}}'> {{$urlPreviousPageNumber}} </a></li>
+                        <li class='page-item next-number disabled'><a href='{{$urls->nextPageUrl()}}'> {{$urls->currentPage()}} </a></li>
+                        <li class='page-item next disabled'><a href='{{$urls->nextPageUrl()}}'> > </a></li>
+                        <?php
+                    }
+                    ?>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

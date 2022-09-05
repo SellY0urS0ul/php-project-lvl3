@@ -10,9 +10,8 @@ class UrlController extends Controller
 {
     public function getAllUrls()
     {
-        $urls = DB::table('urls')->get();
-        return view('urls', compact('urls'), [
-            'urls' => DB::table('urls')->paginate(4)]);
+        $urls = DB::table('urls')->paginate(5);
+        return view('urls', compact('urls'));
     }
 
     public function addUrl()
@@ -23,19 +22,23 @@ class UrlController extends Controller
     public function addUrlSubmit(Request $request)
     {
         $url = $request->url['name'];
-        if (DB::table('urls')->where('name', $url)->exists()) {
-            $id = DB::table('urls')->where('name', $url)->value('id');
+        $filtredUrl = filter_var($url, FILTER_VALIDATE_URL);
+        $tempUrl = parse_url ($filtredUrl);
+        $parsedUrl = $tempUrl['scheme'] . '://' . $tempUrl['host'];
+        if (DB::table('urls')->where('name', $parsedUrl)->exists()) {
+            $id = DB::table('urls')->where('name', $parsedUrl)->value('id');
             flash('URL уже существует')->warning();
             return redirect()->route('url.getbyid', ['id' => $id]);
         }
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
+        if ($filtredUrl) {
             DB::table('urls')->insert([
-                'name' => $request->url['name'],
-                'created_at' => Carbon::now()->toDateTimeString()
+            'name' => $parsedUrl,
+            'created_at' => Carbon::now()->toDateTimeString()
             ]);
-            $id = DB::table('urls')->where('name', $url)->value('id');
+            $id = DB::table('urls')->where('name', $parsedUrl)->value('id');
             flash('Сайт успешно добавлен')->success();
             return redirect()->route('url.getbyid', ['id' => $id]);
+
         } else {
             flash('Некорректный URL')->error();
             return back();
