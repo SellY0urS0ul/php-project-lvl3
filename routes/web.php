@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UrlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main-page');
 });
+
+Route::get('/', [UrlController::class,'addUrl'])->name('url.add');
+
+Route::post('/', [UrlController::class,'addUrlSubmit'])->name('url.addsubmit');
+
+Route::get('/urls', [UrlController::class,'getAllUrls'])->name('url.getallurls');
