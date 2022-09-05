@@ -12,12 +12,6 @@
 
         <!-- Styles -->
 
-        <link rel="stylesheet" href="{{ asset("css/app.css") }}">
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
     </head>
     @include ('header')
     <body class='min-vh-100 d-flex flex-column'>
@@ -34,8 +28,7 @@
                     <div class ='form'>
                     <form method="POST" action="{{route('url.addsubmit')}}" class="d-flex justify-content-center">
                         @csrf
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="text" name="url[name]" value="" class="form-control form-control-lg" placeholder="https://www.example.com">
+                        <input type="text" name="url[name]" value="" class="form-control name form-control-lg" placeholder="https://www.example.com">
                         <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Проверить">
                     </form>
                     </div>

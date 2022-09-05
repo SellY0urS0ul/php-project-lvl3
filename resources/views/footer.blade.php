@@ -3,7 +3,7 @@
 <footer>
 <div class='container-fluid text-center'>
     <div class = 'row'>
-        <div class ='col'>
+        <div class ='col footer-col'>
             <p class='creator'> Created by</p>
             <a href='https://github.com/SellY0urS0ul' class='creator'> SellY0urS0ul </a>
         </div>
