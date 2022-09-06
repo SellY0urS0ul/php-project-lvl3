@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('url_checks', function (Blueprint $table) {
-            $table->id();
-            $table->id('url_id');
+            $table->integer('id');
+            $table->integer('urls_id');
+            $table->primary(['id', 'urls_id']);
             $table->integer('status_code');
             $table->string('h1');
             $table->string('title');
