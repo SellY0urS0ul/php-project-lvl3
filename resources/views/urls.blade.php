@@ -65,6 +65,13 @@
                         <li class='page-item next-number'><a href='{{$urls->nextPageUrl()}}'> {{$urlNextPageNumber}} </a></li>
                         <li class='page-item next'><a href='{{$urls->nextPageUrl()}}'> > </a></li>
                         <?php
+                    }
+                    elseif (!$urls->hasMorePages() && $urls->onFirstPage()){?>
+                        <li class='page-item previous disabled'><a href=''> < </a></li>
+                        <li class='page-item previous-number disabled'><a href=''> {{$urlPreviousPageNumber}} </a></li>
+                        <li class='page-item next-number disabled'><a href=''> {{$urls->currentPage()}} </a></li>
+                        <li class='page-item next disabled'><a href=''> > </a></li>
+                        <?php
                     } else {?>
                         <li class='page-item previous'><a href='{{$urls->previousPageUrl()}}'> < </a></li>
                         <li class='page-item previous-number'><a href='{{$urls->previousPageUrl()}}'> {{$urlPreviousPageNumber}} </a></li>

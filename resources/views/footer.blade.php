@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <footer>
-<div class='container-fluid text-center'>
+<div class='container-fluid text-center footer-container'>
     <div class = 'row'>
         <div class ='col footer-col'>
             <p class='creator'> Created by</p>

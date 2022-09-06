@@ -51,4 +51,10 @@ class UrlController extends Controller
         $url = DB::table('urls')->where('id', $id)->first();
         return view('single-url', compact('url'));
     }
+
+    public function checkUrlById($id)
+    {
+        $url = DB::table('urls')->where('id', $id)->first();
+        return view('single-url', compact('url'));
+    }
 }

@@ -38,6 +38,25 @@
                     </table>
                 </div>
             </div>
+            <div class="container">
+                <div class="check-title">Проверки</div>
+                <form method="POST" action="" class="d-flex checks-table">
+                    @csrf
+                    <input type="submit" class="btn btn-primary btn-checks" value="Запустить проверку">
+                </form>
+                <table class="table table-bordered table-hover text-nowrap">
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Код ответа</th>
+                            <th>h1</th>
+                            <th>title</th>
+                            <th>description</th>
+                            <th>Дата создания</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </main>
     </body>
     @include ('footer')
