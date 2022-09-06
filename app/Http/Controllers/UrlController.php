@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Facades\Http;
 class UrlController extends Controller
 {
     public function getAllUrls()
@@ -47,12 +47,6 @@ class UrlController extends Controller
     }
 
     public function getUrlById($id)
-    {
-        $url = DB::table('urls')->where('id', $id)->first();
-        return view('single-url', compact('url'));
-    }
-
-    public function checkUrlById($id)
     {
         $url = DB::table('urls')->where('id', $id)->first();
         return view('single-url', compact('url'));
