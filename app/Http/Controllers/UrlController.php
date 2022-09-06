@@ -23,8 +23,13 @@ class UrlController extends Controller
     {
         $url = $request->url['name'];
         $filtredUrl = filter_var($url, FILTER_VALIDATE_URL);
-        $tempUrl = parse_url ($filtredUrl);
-        $parsedUrl = $tempUrl['scheme'] . '://' . $tempUrl['host'];
+        if($filtredUrl) {
+            $tempUrl = parse_url ($filtredUrl);
+            $parsedUrl = $tempUrl['scheme'] . '://' . $tempUrl['host'];
+        } else {
+            flash('Некорректный URL')->error();
+            return back();
+        }
         if (DB::table('urls')->where('name', $parsedUrl)->exists()) {
             $id = DB::table('urls')->where('name', $parsedUrl)->value('id');
             flash('URL уже существует')->warning();
@@ -38,10 +43,6 @@ class UrlController extends Controller
             $id = DB::table('urls')->where('name', $parsedUrl)->value('id');
             flash('Сайт успешно добавлен')->success();
             return redirect()->route('url.getbyid', ['id' => $id]);
-
-        } else {
-            flash('Некорректный URL')->error();
-            return back();
         }
     }
 

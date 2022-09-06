@@ -18,7 +18,7 @@ migrate:
 	php artisan migrate
 
 deploy:
-	git push heroku
+	git push heroku main
 
 lint:
 	composer phpcs
