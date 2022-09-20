@@ -18,10 +18,9 @@ Route::get('/', function () {
     return view('main-page');
 });
 
-Route::get('/', [UrlController::class,'addUrl'])->name('url.add');
-
 Route::post('/', [UrlController::class,'addUrlSubmit'])->name('url.addsubmit');
 
 Route::get('/urls', [UrlController::class,'getAllUrls'])->name('url.getallurls');
 
 Route::get('urls/{id}',[UrlController::class,'getUrlById'])->name('url.getbyid');
+

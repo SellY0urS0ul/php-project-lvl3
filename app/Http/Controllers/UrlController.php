@@ -14,11 +14,6 @@ class UrlController extends Controller
         return view('urls', compact('urls'));
     }
 
-    public function addUrl()
-    {
-        return view('main-page');
-    }
-
     public function addUrlSubmit(Request $request)
     {
         $url = $request->url['name'];
@@ -51,4 +46,5 @@ class UrlController extends Controller
         $url = DB::table('urls')->where('id', $id)->first();
         return view('single-url', compact('url'));
     }
+
 }
